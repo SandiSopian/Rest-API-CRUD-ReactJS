@@ -1,9 +1,34 @@
 import { useState } from "react";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const EmpListing = () => {
   const [empdata, empdatachange] = useState(null);
+  const navigate = useNavigate();
+
+  //  Functions navigation feature
+  const LoadDetail = (id) => {
+    navigate("/employee/detail/" + id);
+  };
+  const LoadEdit = (id) => {
+    navigate("/employee/edit/" + id);
+  };
+  const RemoveFunction = (id) => {
+    if (window.confirm("Do you want to remove?")) {
+      //get and delete data by id to server
+      fetch("http://localhost:8000/employee/" + id, {
+        method: "DELETE",
+      })
+        .then((res) => {
+          alert("Removed Successfully");
+          window.location.reload();
+        })
+        .catch((err) => {
+          console.log(err.massage);
+        });
+    }
+  };
+
   // get data from json
   useEffect(() => {
     fetch("http://localhost:8000/employee")
@@ -51,9 +76,30 @@ const EmpListing = () => {
                     <td>{item.email}</td>
                     <td>{item.phone}</td>
                     <td>
-                      <a className="btn btn-success m-1">Edit</a>
-                      <a className="btn btn-danger m-1">Remove</a>
-                      <a className="btn btn-primary m-1">Details</a>
+                      <a
+                        onClick={() => {
+                          LoadEdit(item.id);
+                        }}
+                        className="btn btn-success m-1"
+                      >
+                        Edit
+                      </a>
+                      <a
+                        onClick={() => {
+                          RemoveFunction(item.id);
+                        }}
+                        className="btn btn-danger m-1"
+                      >
+                        Remove
+                      </a>
+                      <a
+                        onClick={() => {
+                          LoadDetail(item.id);
+                        }}
+                        className="btn btn-primary m-1"
+                      >
+                        Details
+                      </a>
                     </td>
                   </tr>
                 ))}

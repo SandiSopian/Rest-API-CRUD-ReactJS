@@ -31,6 +31,7 @@ const EmpCreate = () => {
   };
 
   return (
+    // Input Form Data
     <div>
       <div className="row">
         <div className="offset-lg-3 col-lg-6">

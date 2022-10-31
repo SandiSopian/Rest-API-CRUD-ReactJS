@@ -2,16 +2,9 @@
   "employee": [
     {
       "id": 1,
-      "name": "jamet",
-      "email": "jamet@gmail.com",
+      "name": "Hea",
+      "email": "hea@gmail.com",
       "phone": "08090888089"
-    },
-    {
-      "id": 2,
-      "name": "Raisa",
-      "email": "Raisa@gmail.com",
-      "phone": "08445766774",
-      "active": true
     },
     {
       "id": 3,
